@@ -151,8 +151,8 @@ def main():
     # print("---calculating all paths took %s seconds ---" % (time.time() - start_time))
 
 
-words = read_file("D:/informatica/anno2023/IUM/italungo.txt")
-alphabet = read_file("D:/informatica/anno2023/IUM/alfabeto.txt")
+words = set(read_file("D:/informatica/anno2023/IUM/italungo.txt"))
+alphabet = set(read_file("D:/informatica/anno2023/IUM/alfabeto.txt"))
 
 if __name__ == '__main__':
     main()
