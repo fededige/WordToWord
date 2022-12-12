@@ -75,10 +75,24 @@ def build_level(g, start, end):
     return node_list
 
 
+allPaths = list()
+
+
+def addPath(g, start, end, c):
+    global allPaths
+    global start_time
+    for path in nx.all_shortest_paths(g, source=start, target=end):
+        if path not in allPaths:
+            print(path)
+            allPaths.append(path)
+    print("---calculating paths took %s seconds ---" % (time.time() - start_time))
+
+
 def build_graph(g, start, end):
     level = build_level(g, start, end)
     counter = 0
     if level is None:
+        addPath(g, start, end, counter)
         return g
     q = Queue(maxsize=0)
     for n in level:
@@ -86,18 +100,22 @@ def build_graph(g, start, end):
             q.put(n)
 
     while not q.empty():
-        if counter == 2:
+        if counter == 3:
             return g
         n = q.get()
         if n != start:
             level = build_level(g, n, end)
             if level is None:
                 counter += 1
+                addPath(g, start, end, counter)
             else:
                 for n in level:
-                    if n not in q.queue:
+                    if (n not in q.queue) & (len(n) > 3):
                         q.put(n)
     return g
+
+
+start_time = float()
 
 
 def main():
@@ -113,20 +131,24 @@ def main():
 
     g = nx.Graph()
     print("building graph")
+    global start_time
     start_time = time.time()
     g = build_graph(g, start, end)
+    print()
+    print()
+    print("_____________________")
     print("---building graph time: %s seconds ---" % (time.time() - start_time))
     print("graph has: " + str(g.number_of_nodes()) + " nodes")
     print("graph has: " + str(g.number_of_edges()) + " edges")
     print("_____________________")
     print()
     print()
-    start_time = time.time()
-    print(nx.dijkstra_path(g, start, end))
-    print("---calculating min path took %s seconds ---" % (time.time() - start_time))
-    start_time = time.time()
-    print([p for p in nx.all_shortest_paths(g, source=start, target=end)])
-    print("---calculating all paths took %s seconds ---" % (time.time() - start_time))
+    # start_time = time.time()
+    # print(nx.dijkstra_path(g, start, end))
+    # print("---calculating min path took %s seconds ---" % (time.time() - start_time))
+    # start_time = time.time()
+    # print([p for p in nx.all_shortest_paths(g, source=start, target=end)])
+    # print("---calculating all paths took %s seconds ---" % (time.time() - start_time))
 
 
 words = read_file("D:/informatica/anno2023/IUM/italungo.txt")
