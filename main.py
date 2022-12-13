@@ -23,7 +23,12 @@ def r1(start, end):
     return words_r1
 
 
+r2_count = 0
+
+
 def r2(start, end):
+    global r2_count
+    r2_count += 1
     words_r2 = list()
     for perm in permutations(start):
         temp = "".join(perm)
@@ -99,8 +104,8 @@ def build_graph(g, start, end):
         if n not in q.queue:
             q.put(n)
 
-    while not q.empty():
-        if counter == 5:
+    while q:
+        if counter == 1:
             return g
         n = q.get()
         if n != start:
@@ -141,29 +146,29 @@ def main():
     print("graph has: " + str(g.number_of_nodes()) + " nodes")
     print("graph has: " + str(g.number_of_edges()) + " edges")
     print("_____________________")
-    print("g.has_edge('inizio', 'inizia') == ", g.has_edge("inizio", "inizia"))
-    print("g.has_node('inizia') == ", g.has_node("inizia"))
-    print("g.has_edge('inizia', 'inezia') == ", g.has_edge("inizia", "inezia"))
-    print("g.has_node('inezia') == ", g.has_node("inezia"))
-    print("g.has_edge('inezia', 'inedia') == ", g.has_edge("inezia", "inedia"))
-    print("g.has_node('inedia') == ", g.has_node("inedia"))
-    print("g.has_edge('inedia', 'india') == ", g.has_edge("inedia", "india"))
-    print("g.has_node('india') == ", g.has_node("india"))
-    print("g.has_edge('india', 'invia') == ", g.has_edge("india", "invia"))
-    print("g.has_node('invia') == ", g.has_node("invia"))
-    print("g.has_edge('invia', 'vinai') == ", g.has_edge("invia", "vinai"))
-    print("g.has_node('vinai') == ", g.has_node("vinai"))
-    print("g.has_edge('vinai', 'vini') == ", g.has_edge("vinai", "vini"))
-    print("g.has_node('vini') == ", g.has_node("vini"))
-    print("g.has_edge('vini', 'fini') == ", g.has_edge("vini", "fini"))
-    print("g.has_node('fini') == ", g.has_node("fini"))
-    print("g.has_edge('fini', 'fine') == ", g.has_edge("fini", "fine"))
-    print("g.has_node('fine') == ", g.has_node("fine"))
-    print()
+    # print("g.has_edge('inizio', 'inizia') == ", g.has_edge("inizio", "inizia"))
+    # print("g.has_node('inizia') == ", g.has_node("inizia"))
+    # print("g.has_edge('inizia', 'inezia') == ", g.has_edge("inizia", "inezia"))
+    # print("g.has_node('inezia') == ", g.has_node("inezia"))
+    # print("g.has_edge('inezia', 'inedia') == ", g.has_edge("inezia", "inedia"))
+    # print("g.has_node('inedia') == ", g.has_node("inedia"))
+    # print("g.has_edge('inedia', 'india') == ", g.has_edge("inedia", "india"))
+    # print("g.has_node('india') == ", g.has_node("india"))
+    # print("g.has_edge('india', 'invia') == ", g.has_edge("india", "invia"))
+    # print("g.has_node('invia') == ", g.has_node("invia"))
+    # print("g.has_edge('invia', 'vinai') == ", g.has_edge("invia", "vinai"))
+    # print("g.has_node('vinai') == ", g.has_node("vinai"))
+    # print("g.has_edge('vinai', 'vini') == ", g.has_edge("vinai", "vini"))
+    # print("g.has_node('vini') == ", g.has_node("vini"))
+    # print("g.has_edge('vini', 'fini') == ", g.has_edge("vini", "fini"))
+    # print("g.has_node('fini') == ", g.has_node("fini"))
+    # print("g.has_edge('fini', 'fine') == ", g.has_edge("fini", "fine"))
+    # print("g.has_node('fine') == ", g.has_node("fine"))
+    # print()
     print("number of paths calculated: ", len(allPaths), ":")
     for p in allPaths:
         print(p, "length: ", len(p))
-
+    print("la regola due è stata usata: ", r2_count)
     # p = nx.dijkstra_path(g, start, end)
     # print(p, "length:", len(p))
 
@@ -173,3 +178,14 @@ alphabet = set(read_file("D:/informatica/anno2023/IUM/alfabeto.txt"))
 
 if __name__ == '__main__':
     main()
+    # s = "abcdefg"
+    #
+    # start_time = time.time()
+    # p = list(permutations(s))
+    # print(len(p))
+    # print("---permutations found in: %s seconds ---" % (time.time() - start_time))
+    #
+    # start_time = time.time()
+    # p = set(permutations(s))
+    # print(len(p))
+    # print("---permutations found in: %s seconds ---" % (time.time() - start_time))
