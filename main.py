@@ -85,7 +85,7 @@ def addPath(g, start, end, c):
         if path not in allPaths:
             print(path)
             allPaths.append(path)
-    print("---calculating paths took %s seconds ---" % (time.time() - start_time))
+            print("---calculating paths took %s seconds ---" % (time.time() - start_time))
 
 
 def build_graph(g, start, end):
@@ -100,7 +100,7 @@ def build_graph(g, start, end):
             q.put(n)
 
     while not q.empty():
-        if counter == 3:
+        if counter == 5:
             return g
         n = q.get()
         if n != start:
@@ -122,12 +122,12 @@ def main():
     print("insert two words, press enter to use default")
     start = input()
     if start == "":
-        start = "ciao"
-        end = "piano"
+        start = "inizio"
+        end = "fine"
     else:
         end = input()
         if end == "":
-            end = "piano"
+            end = "fine"
 
     g = nx.Graph()
     print("building graph")
@@ -141,14 +141,31 @@ def main():
     print("graph has: " + str(g.number_of_nodes()) + " nodes")
     print("graph has: " + str(g.number_of_edges()) + " edges")
     print("_____________________")
+    print("g.has_edge('inizio', 'inizia') == ", g.has_edge("inizio", "inizia"))
+    print("g.has_node('inizia') == ", g.has_node("inizia"))
+    print("g.has_edge('inizia', 'inezia') == ", g.has_edge("inizia", "inezia"))
+    print("g.has_node('inezia') == ", g.has_node("inezia"))
+    print("g.has_edge('inezia', 'inedia') == ", g.has_edge("inezia", "inedia"))
+    print("g.has_node('inedia') == ", g.has_node("inedia"))
+    print("g.has_edge('inedia', 'india') == ", g.has_edge("inedia", "india"))
+    print("g.has_node('india') == ", g.has_node("india"))
+    print("g.has_edge('india', 'invia') == ", g.has_edge("india", "invia"))
+    print("g.has_node('invia') == ", g.has_node("invia"))
+    print("g.has_edge('invia', 'vinai') == ", g.has_edge("invia", "vinai"))
+    print("g.has_node('vinai') == ", g.has_node("vinai"))
+    print("g.has_edge('vinai', 'vini') == ", g.has_edge("vinai", "vini"))
+    print("g.has_node('vini') == ", g.has_node("vini"))
+    print("g.has_edge('vini', 'fini') == ", g.has_edge("vini", "fini"))
+    print("g.has_node('fini') == ", g.has_node("fini"))
+    print("g.has_edge('fini', 'fine') == ", g.has_edge("fini", "fine"))
+    print("g.has_node('fine') == ", g.has_node("fine"))
     print()
-    print()
-    # start_time = time.time()
-    # print(nx.dijkstra_path(g, start, end))
-    # print("---calculating min path took %s seconds ---" % (time.time() - start_time))
-    # start_time = time.time()
-    # print([p for p in nx.all_shortest_paths(g, source=start, target=end)])
-    # print("---calculating all paths took %s seconds ---" % (time.time() - start_time))
+    print("number of paths calculated: ", len(allPaths), ":")
+    for p in allPaths:
+        print(p, "length: ", len(p))
+
+    # p = nx.dijkstra_path(g, start, end)
+    # print(p, "length:", len(p))
 
 
 words = set(read_file("D:/informatica/anno2023/IUM/italungo.txt"))
