@@ -19,20 +19,21 @@ def addWord(word, dict_path, alpha_path):
 
 def calcola(start, end):
     alpha_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/alfabeto.txt"
-    print("Do you want to update dictionary? Y/N")
-    mode = input().upper()
-    print("Insert name_of_dictionary without .txt (press ENTER to use default)")
-    dictionary = input()
-    if dictionary == "":
-        dictionary = "italungo"
+    # print("Do you want to update dictionary? Y/N")
+    # mode = input().upper()
+    # print("Insert name_of_dictionary without .txt (press ENTER to use default)")
+    # dictionary = input()
+    # if dictionary == "":
+    #     dictionary = "italungo"
+    dictionary = "italungo"
     dict_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + dictionary + "/" + dictionary + ".txt"
-    if mode == "Y":
-        buildGraph(dictionary, dict_path, alpha_path)
-    elif mode != "N":
-        print("input not recognized")
-        return
-    pause = input()
-    print(pause)
+    # if mode == "Y":
+    #     buildGraph(dictionary, dict_path, alpha_path)
+    # elif mode != "N":
+    #     print("input not recognized")
+    #     return
+    # pause = input()
+    # print(pause)
     g = nx.read_adjlist("D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + dictionary + "/adj_" + dictionary)
 
     for node in addWord(start, dict_path, alpha_path):
@@ -42,10 +43,17 @@ def calcola(start, end):
     start_time = time.time()
     i = 0
     stringa = str()
-    for path in nx.all_shortest_paths(g, source=start, target=end):
+    paths = nx.all_shortest_paths(g, source=start, target=end)
+    elapsedTime = str((time.time() - start_time))
+    betterElapseTime = elapsedTime.split(".")[0] + "." + elapsedTime.split(".")[1][0:4]
+    for path in paths:
         i += 1
-        stringa += str(i) + ": " + str(path) + "length: " + str(len(path)) + "\n"
-    stringa += ("---paths found in: %s seconds ---" % (time.time() - start_time))
+        stringa += str(i) + ")" + "\n"
+        for p in path:
+            stringa += p + "\n"
+        stringa += "length: " + str(len(path)) + "\n"
+        stringa += "\n"
+    stringa += "#" + "--- " + str(i) + " paths found in: " + betterElapseTime + " seconds ---" + "\n\n"
     return stringa
 
 # if __name__ == '__main__':
