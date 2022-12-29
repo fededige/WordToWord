@@ -33,6 +33,10 @@ def changeDictionary(variable, label, label2):
     if answer:
         dictionary = variable
         buildGraph(dictionary)
+        label.config(text="Dictionary: " + dictionary)
+        label2.config(text="Dictionary: " + dictionary)
+        impGraph(dictionary)
+        return
 
 
 def addWordToGraph(text):

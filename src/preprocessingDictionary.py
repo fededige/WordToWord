@@ -20,4 +20,4 @@ def buildGraph(name):
         for n in node_list:
             g.add_edge(p, n)
     print("---building graph time: %s seconds ---" % (time.time() - start_time))
-    nx.write_adjlist(g, "adj_" + name)
+    nx.write_adjlist(g, "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + name + "/" + "adj_" + name)
