@@ -1,10 +1,11 @@
 import os
-from tkinter import ttk, DISABLED, NORMAL, END
+from tkinter import ttk, DISABLED, NORMAL, END, messagebox
 import tkinter as tk
 
 import networkx as nx
 
 from calcoloPercorso import compute, impGraph, tempAddWord
+from src.preprocessingDictionary import buildGraph
 
 
 def onClick(start, end, text, lbl):
@@ -21,9 +22,16 @@ def onClick(start, end, text, lbl):
 
 def changeDictionary(variable, label):
     global dictionary
-    dictionary = variable
-    label.config(text="Dictionary: " + dictionary)
-    impGraph(dictionary)
+    if os.path.exists("D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + variable + "/adj_" + variable):
+        dictionary = variable
+        label.config(text="Dictionary: " + dictionary)
+        impGraph(dictionary)
+        return
+    answer = messagebox.askyesno("Question", "The dictionary chose needs to be preprocessed (it could take a lot of "
+                                             "time)")
+    if answer:
+        dictionary = variable
+        buildGraph(dictionary)
 
 
 def addWordToGraph(text):
@@ -92,6 +100,12 @@ def main(window):
     button3 = tk.Button(tab2, text="Add!", font=("Arial", 15),
                         command=lambda: addWordToGraph(wordInput))
     button3.place(x=50, y=300)
+
+    separator = ttk.Separator(tab2, orient='vertical')
+    separator.place(x=400, y=526, height=50)
+
+    lblDictionary = tk.Label(tab2, text="Dictionary: " + dictionary, font=("Arial", 15))
+    lblDictionary.place(x=410, y=530)
 
 
 dictionary = "words_italian"

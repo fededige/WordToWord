@@ -4,7 +4,9 @@ import constants
 from src.utils import read_file, r3, r1, r4, r2
 
 
-def buildGraph(name, dict_path, alpha_path):
+def buildGraph(name):
+    alpha_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/alfabeto.txt"
+    dict_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + name + "/" + name + ".txt"
     words = set(read_file(dict_path))
     dictionary = list(read_file(dict_path))
     alphabet = set(read_file(alpha_path))
