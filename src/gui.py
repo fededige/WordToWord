@@ -1,20 +1,20 @@
 import os
-from tkinter import ttk, DISABLED, NORMAL
+from tkinter import ttk, DISABLED, NORMAL, END
 import tkinter as tk
 
 import networkx as nx
 
-from calcoloPercorso import compute, impGraph
+from calcoloPercorso import compute, impGraph, tempAddWord
 
 
 def onClick(start, end, text, lbl):
     text.config(state=NORMAL)
-    text.delete('1.0', tk.END)
+    text.delete('1.0', END)
     try:
         res = compute(start, end, dictionary)
     except nx.NetworkXException:
-        res = "no path between " + start + " e " + end + "#---"
-    text.insert(tk.END, res.split("#")[0])
+        res = "no path between " + start + " and " + end + "#---"
+    text.insert(END, res.split("#")[0])
     lbl.config(text=res.split("#")[1])
     text.config(state=DISABLED)
 
@@ -24,6 +24,11 @@ def changeDictionary(variable, label):
     dictionary = variable
     label.config(text="Dictionary: " + dictionary)
     impGraph(dictionary)
+
+
+def addWordToGraph(text):
+    tempAddWord(text.get("1.0", "end-1c"))
+    text.delete('1.0', END)
 
 
 def main(window):
@@ -80,13 +85,13 @@ def main(window):
     separator2 = ttk.Separator(tab2, orient="horizontal")
     separator2.place(x=0, y=250, width=800)
 
-    wordLabel = tk.Label(tab2, text="Aggiungi parola: ", font=("Arial", 15))
+    wordLabel = tk.Label(tab2, text="Add word: ", font=("Arial", 15))
     wordLabel.place(x=50, y=260)
     wordInput = tk.Text(tab2, width=20, height=1.2, font=("Helvetica", 15))
     wordInput.place(x=200, y=260)
     button3 = tk.Button(tab2, text="Add!", font=("Arial", 15),
-                        command=lambda: changeDictionary(var.get(), lblDictionary))
-    button3.place(x=50, y=90)
+                        command=lambda: addWordToGraph(wordInput))
+    button3.place(x=50, y=300)
 
 
 dictionary = "words_italian"

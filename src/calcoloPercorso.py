@@ -4,20 +4,31 @@ import networkx as nx
 from src.utils import addWord
 
 global g
+global alpha_path
+global dict_path
 
 
 def impGraph(dictionary):
     global g
+    global alpha_path
+    global dict_path
     alpha_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/alfabeto.txt"
     dict_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + dictionary + "/" + dictionary + ".txt"
     g = nx.read_adjlist(
         "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + dictionary + "/adj_" + dictionary)
 
 
+def tempAddWord(word):
+    global g
+    global alpha_path
+    global dict_path
+    g = addWord(g, word, dict_path, alpha_path)
+
+
 def compute(start, end, dictionary):
     global g
-    alpha_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/alfabeto.txt"
-    dict_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + dictionary + "/" + dictionary + ".txt"
+    global alpha_path
+    global dict_path
     g = addWord(g, start, dict_path, alpha_path)
     g = addWord(g, end, dict_path, alpha_path)
     start_time = time.time()
