@@ -20,11 +20,12 @@ def onClick(start, end, text, lbl):
     text.config(state=DISABLED)
 
 
-def changeDictionary(variable, label):
+def changeDictionary(variable, label, label2):
     global dictionary
     if os.path.exists("D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + variable + "/adj_" + variable):
         dictionary = variable
         label.config(text="Dictionary: " + dictionary)
+        label2.config(text="Dictionary: " + dictionary)
         impGraph(dictionary)
         return
     answer = messagebox.askyesno("Question", "The dictionary chose needs to be preprocessed (it could take a lot of "
@@ -72,6 +73,9 @@ def main(window):
     lblDictionary = tk.Label(tab1, text="Dictionary: " + dictionary, font=("Arial", 15))
     lblDictionary.place(x=410, y=530)
 
+    lblDictionary2 = tk.Label(tab2, text="Dictionary: " + dictionary, font=("Arial", 15))
+    lblDictionary2.place(x=410, y=530)
+
     button = tk.Button(tab1, text="Find!", font=("Arial", 15),
                        command=lambda: onClick(startInput.get("1.0", "end-1c"), endInput.get("1.0", "end-1c"),
                                                textArea,
@@ -87,7 +91,7 @@ def main(window):
     lblTab2 = tk.Label(tab2, text="Choose dictionary:", font=("Arial", 15))
     lblTab2.place(x=50, y=50)
     button2 = tk.Button(tab2, text="Change!", font=("Arial", 15),
-                        command=lambda: changeDictionary(var.get(), lblDictionary))
+                        command=lambda: changeDictionary(var.get(), lblDictionary, lblDictionary2))
     button2.place(x=50, y=90)
 
     separator2 = ttk.Separator(tab2, orient="horizontal")
@@ -104,8 +108,6 @@ def main(window):
     separator = ttk.Separator(tab2, orient='vertical')
     separator.place(x=400, y=526, height=50)
 
-    lblDictionary = tk.Label(tab2, text="Dictionary: " + dictionary, font=("Arial", 15))
-    lblDictionary.place(x=410, y=530)
 
 
 dictionary = "words_italian"
