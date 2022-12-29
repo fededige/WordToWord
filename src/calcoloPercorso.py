@@ -3,17 +3,23 @@ import networkx as nx
 
 from src.utils import addWord
 
+global g
 
-def compute(start, end, dictionary):
+
+def impGraph(dictionary):
+    global g
     alpha_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/alfabeto.txt"
     dict_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + dictionary + "/" + dictionary + ".txt"
     g = nx.read_adjlist(
         "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + dictionary + "/adj_" + dictionary)
 
-    for node in addWord(start, dict_path, alpha_path):
-        g.add_edge(start, node)
-    for node in addWord(end, dict_path, alpha_path):
-        g.add_edge(end, node)
+
+def compute(start, end, dictionary):
+    global g
+    alpha_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/alfabeto.txt"
+    dict_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + dictionary + "/" + dictionary + ".txt"
+    g = addWord(g, start, dict_path, alpha_path)
+    g = addWord(g, end, dict_path, alpha_path)
     start_time = time.time()
     i = 0
     result = str()

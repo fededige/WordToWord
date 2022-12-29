@@ -59,12 +59,19 @@ def r4(start, words):
     return words_r4
 
 
-def addWord(word, dict_path, alpha_path):
+def computeNode(word, dict_path, alpha_path):
     words = set(read_file(dict_path))
     alphabet = set(read_file(alpha_path))
     node_list = []
     if word not in words:
         node_list = r1(word, words, alphabet) + r3(word, words, alphabet) + r4(word, words)
-        if len(word) > constants.MAX_LENGTH:
+        if len(word) < constants.MAX_LENGTH:
             node_list += r2(word, words)
     return node_list
+
+
+def addWord(g, word, dict_path, alpha_path):
+    if word not in g:
+        for node in computeNode(word, dict_path, alpha_path):
+            g.add_edge(word, node)
+    return g

@@ -4,12 +4,10 @@ import tkinter as tk
 
 import networkx as nx
 
-from calcoloPercorso import compute
+from calcoloPercorso import compute, impGraph
 
 
-
-
-def onClick(start, end, text, lbl, dictionary):
+def onClick(start, end, text, lbl):
     text.config(state=NORMAL)
     text.delete('1.0', tk.END)
     try:
@@ -25,12 +23,11 @@ def changeDictionary(variable, label):
     global dictionary
     dictionary = variable
     label.config(text="Dictionary: " + dictionary)
-    print(dictionary)
+    impGraph(dictionary)
 
 
 def main(window):
     global dictionary
-    dictionary = "words_italian"
     window.title("WordToWord")
     window.geometry("800x600")
     tabControl = ttk.Notebook(window)
@@ -65,7 +62,7 @@ def main(window):
     button = tk.Button(tab1, text="Find!", font=("Arial", 15),
                        command=lambda: onClick(startInput.get("1.0", "end-1c"), endInput.get("1.0", "end-1c"),
                                                textArea,
-                                               lblTime, dictionary))
+                                               lblTime))
     button.place(x=370, y=90)
 
     options = next(os.walk("D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries"))[1]
@@ -92,8 +89,9 @@ def main(window):
     button3.place(x=50, y=90)
 
 
-dictionary = str()
+dictionary = "words_italian"
 if __name__ == "__main__":
     root = tk.Tk()
     main(root)
+    impGraph(dictionary)
     root.mainloop()
