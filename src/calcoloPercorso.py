@@ -25,7 +25,7 @@ def tempAddWord(word):
     g = addWord(g, word, dict_path, alpha_path)
 
 
-def compute(start, end, dictionary):
+def compute(start, end):
     global g
     global alpha_path
     global dict_path

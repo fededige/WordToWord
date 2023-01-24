@@ -12,7 +12,7 @@ def onClick(start, end, text, lbl):
     text.config(state=NORMAL)
     text.delete('1.0', END)
     try:
-        res = compute(start, end, dictionary)
+        res = compute(start, end)
     except nx.NetworkXException:
         res = "no path between " + start + " and " + end + "#---"
     text.insert(END, res.split("#")[0])
