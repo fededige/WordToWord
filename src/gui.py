@@ -22,7 +22,7 @@ def onClick(start, end, text, lbl):
 
 def changeDictionary(variable, label, label2):
     global dictionary
-    if os.path.exists("D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + variable + "/adj_" + variable):
+    if os.path.exists("../Dictionaries/" + variable + "/adj_" + variable):
         dictionary = variable
         label.config(text="Dictionary: " + dictionary)
         label2.config(text="Dictionary: " + dictionary)
@@ -86,7 +86,7 @@ def main(window):
                                                lblTime))
     button.place(x=370, y=90)
 
-    options = next(os.walk("D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries"))[1]
+    options = next(os.walk("../Dictionaries"))[1]
     var = tk.StringVar(root)
     var.set(options[0])  # default value
     w = tk.OptionMenu(tab2, var, *options)
@@ -111,7 +111,6 @@ def main(window):
 
     separator = ttk.Separator(tab2, orient='vertical')
     separator.place(x=400, y=526, height=50)
-
 
 
 dictionary = "words_italian"

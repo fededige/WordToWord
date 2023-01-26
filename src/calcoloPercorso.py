@@ -12,10 +12,10 @@ def impGraph(dictionary):
     global g
     global alpha_path
     global dict_path
-    alpha_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/alfabeto.txt"
-    dict_path = "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + dictionary + "/" + dictionary + ".txt"
+    alpha_path = "../Dictionaries/alfabeto.txt"
+    dict_path = "../Dictionaries/" + dictionary + "/" + dictionary + ".txt"
     g = nx.read_adjlist(
-        "D:/informatica/anno2023/IUM/PycharmProjects/WordToWord/Dictionaries/" + dictionary + "/adj_" + dictionary)
+        "../Dictionaries/" + dictionary + "/adj_" + dictionary)
 
 
 def tempAddWord(word):
